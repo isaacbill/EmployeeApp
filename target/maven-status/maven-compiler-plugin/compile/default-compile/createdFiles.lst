@@ -1,0 +1,5 @@
+com\isaac\EmployeeManagementApp\resources\JavaEE8Resource.class
+com\isaac\EmployeeManagementApp\JAXRSConfiguration.class
+com\isaac\EmployeeManagementApp\dao\EmployeeDAO.class
+com\isaac\EmployeeManagementApp\bean\EmployeeBean.class
+com\isaac\EmployeeManagementApp\model\Employee.class

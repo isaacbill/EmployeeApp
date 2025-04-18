@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Employee Management</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:dataTable value="#{employeeBean.employees}" var="emp" editable="true" style="width:90%">
+            <p:column headerText="ID">#{emp.id}</p:column>
+            <p:column headerText="First Name">#{emp.firstName}</p:column>
+            <p:column headerText="Last Name">#{emp.lastName}</p:column>
+            <p:column headerText="Email">#{emp.email}</p:column>
+            <p:column headerText="Department">#{emp.department}</p:column>
+            <p:column headerText="Salary">#{emp.salary}</p:column>
+
+            <p:column headerText="Actions">
+                <p:commandButton value="Edit"
+                                 actionListener="#{employeeBean.setSelectedEmployee(emp)}"
+                                 update=":form2"
+                                 process="@this"
+                                 styleClass="ui-button-secondary"
+                                 style="margin-right:5px"/>
+                <p:commandButton value="Delete"
+                                 action="#{employeeBean.deleteEmployee(emp)}"
+                                 update="@form"
+                                 onclick="return confirm('Are you sure?');"
+                                 styleClass="ui-button-danger"
+                                 style="margin-left:5px"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+
+    <h:form id="form2">
+        <p:panel header="Add / Edit Employee" style="margin-top:20px">
+            <p:panelGrid columns="2" columnClasses="label,value" style="margin-bottom:10px">
+                <h:outputLabel value="First Name:" for="firstName"/>
+                <p:inputText id="firstName" value="#{employeeBean.selectedEmployee.firstName}" required="true"/>
+
+                <h:outputLabel value="Last Name:" for="lastName"/>
+                <p:inputText id="lastName" value="#{employeeBean.selectedEmployee.lastName}" required="true"/>
+
+                <h:outputLabel value="Email:" for="email"/>
+                <p:inputText id="email" value="#{employeeBean.selectedEmployee.email}" required="true"/>
+
+                <h:outputLabel value="Department:" for="department"/>
+                <p:inputText id="department" value="#{employeeBean.selectedEmployee.department}"/>
+
+                <h:outputLabel value="Salary:" for="salary"/>
+                <p:inputText id="salary" value="#{employeeBean.selectedEmployee.salary}" required="true"/>
+            </p:panelGrid>
+
+            <p:commandButton value="Save"
+                             action="#{employeeBean.addEmployee}"
+                             update="@form"
+                             styleClass="ui-button-primary"
+                             style="margin-right:10px"/>
+
+            <p:commandButton value="Update"
+                             action="#{employeeBean.updateEmployee}"
+                             update="@form"
+                             styleClass="ui-button-success"/>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
